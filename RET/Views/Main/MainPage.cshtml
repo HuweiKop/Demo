@@ -36,12 +36,6 @@
 
             $("#box-tabs, #box-left-tabs").tabs();
 
-            if ("0" == '@ViewData["IsAdmin"]') {
-                $("#rightpage").attr("src", '@Url.Content("~/Property/PropertyList?page=1")')
-            }
-            else {
-                $("#rightpage").attr("src", '@Url.Content("~/Account/UserList?page=1")')
-            }
 
         });
     </script>
@@ -226,38 +220,18 @@
                 <div class="slide closed">
                     <h6 id="h-menu-resource"><a href="#resource" id="ResourceManagement"><span>资源管理</span></a></h6>
                     <ul id="menu-resource" class="closed">
-                        <li><a href="~/Brand/BrandList?page=1" id="BrandManagement" target="rightpage">品牌管理</a></li>
+                        
                         <li><a href="~/Property/PropertyList?page=1" id="PropertyManagement" target="rightpage">Shopping Mall管理</a></li>
-                        <li><a href="~/Developer/DeveloperList?page=1" id="DeveloperManagement" target="rightpage">开发商管理</a></li>
+                        
                         <li class="collapsible last">
                             <a href="#" class="plus" id="BaseManagement">基础数据管理</a>
                             <ul class="collapsed">
                                 <li><a href="~/City/CityList?page=1" id="CityManagement" target="rightpage">城市管理</a></li>
                                 <li><a href="~/District/DistrictList?page=1" id="DistrictManagement" target="rightpage">区域管理</a></li>
-                                <li><a href="~/BusinessDistrict/BusinessDistrictList?page=1" id="BusinessDistrictManagement" target="rightpage">商圈管理</a></li>
+                                
                                 <li class="last"><a href="">How to Add a New Page</a></li>
                             </ul>
                         </li>
-                    </ul>
-                </div>
-                <div class="slide closed">
-                    <h6 id="h-menu-map1"><a href="#map1" id="MapManagement"><span>地图</span></a></h6>
-                    <ul id="menu-map1" class="closed">
-                        <li><a href="~/Map/ViewHistory" id="Map" target="rightpage">浏览记录</a></li>
-                        <li><a href="~/Map/AllCity" id="City" target="rightpage">城市分布</a></li>
-                    </ul>
-                </div>
-                <div class="slide closed">
-                    <h6 id="h-menu-information"><a href="#information" id="InformationManagement"><span>信息管理</span></a></h6>
-                    <ul id="menu-information" class="closed">
-                        <li><a href="~/Information/InformationEdit" id="InformationPush" target="rightpage">信息推送</a></li>
-                        <li><a href="~/Information/InformationList?page=1" id="InformationList" target="rightpage">信息推送列表</a></li>
-                    </ul>
-                </div>
-                <div class="slide closed">
-                    <h6 id="h-menu-statistics"><a href="#statistics" id="StatisticsManagement"><span>统计</span></a></h6>
-                    <ul id="menu-statistics" class="closed">
-                        <li><a href="~/Statistics/AverageRentByMonthStatistics" id="AverageRentByMonthStatistics" target="rightpage">平均租金统计</a></li>
                     </ul>
                 </div>
             </div>
