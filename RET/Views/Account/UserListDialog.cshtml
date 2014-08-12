@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="~/resources/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="~/resources/css/iframe_style.css" />
+    <link id="color" rel="stylesheet" type="text/css" href="~/resources/css/colors/blue.css" />
+    <link rel="stylesheet" type="text/css" href="~/resources/css/rightpage.css" />
+
+    <!-- scripts (jquery) -->
+    <script src="@Url.Content("~/resources/scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/jquery.ui.selectmenu.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/tiny_mce/jquery.tinymce.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/smooth.form.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/smooth.dialog.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var alreadyAddUsersString = '@ViewData["alreadyUser"]';
+            alreadyAddUsersString = alreadyAddUsersString.replace(/&quot;/g, '"');
+            var alreadyAddUsersArray = $.parseJSON(alreadyAddUsersString);
+            DiableChekcBox(alreadyAddUsersArray);
+        })
+
+        function DiableChekcBox(disableUsersArray) {
+            for (var i = 0; i < disableUsersArray.length; i++) {
+                $("input[type=checkbox][value=" + disableUsersArray[i] + "]").attr("disabled", "disabled");
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+    <div id="content" style="overflow: visible">
+        <div id="right" style="overflow: visible">
+            <!-- table -->
+            <div class="box" style="overflow: visible">
+                <div class="table">
+                    <table style="width: 100%" class="tableFix;overflow: visible">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px;"></th>
+                                <th>名称</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr id="@user.Id">
+                                    <td>
+                                        <input type="checkbox" value="@user.Id" />
+                                    </td>
+                                    <td>@user.UserName</td>
+                                </tr> 
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+
+            </div>
+            <!-- end table -->
+        </div>
+    </div>
+</body>
+</html>

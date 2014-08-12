@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sheets>
+  <sheet>
+    <name>购物中心</name>
+    <table>Property</table>
+    <columns>
+      <column fk="yes" referenceTable="Property_Type" referenceColumn="Id" showColumn="Name">
+        <name>分类</name>
+        <field>PropertyTypeId</field>
+      </column>
+      <column>
+        <name>英文名字</name>
+        <field>EnglishName</field>
+      </column>
+      <column>
+        <name>中文名字</name>
+        <field>ChineseName</field>
+      </column>
+      <column fk="yes" referenceTable="Business_District" referenceColumn="Id" showColumn="Name">
+        <name>商圈</name>
+        <field>BusinessDistrictId</field>
+      </column>
+      <column fk="yes" referenceTable="District" referenceColumn="Id" showColumn="Name">
+        <name>所在区</name>
+        <joinTable>Business_District</joinTable>
+        <field>DistrictId</field>
+      </column>
+      <column fk="yes" referenceTable="City" referenceColumn="Id" showColumn="Name">
+        <name>城市</name>
+        <joinTable>District</joinTable>
+        <field>CityId</field>
+      </column>
+      <column>
+        <name>建成年份</name>
+        <field>FinishBuildTime</field>
+      </column>
+      <column fk="yes" referenceTable="Property_Status" referenceColumn="Id" showColumn="Name">
+        <name>目前状态</name>
+        <field>PropertyStatusId</field>
+      </column>
+      <column>
+        <name>建筑面积</name>
+        <field>AreaofStructure</field>
+      </column>
+      <column>
+        <name>地址</name>
+        <field>Address</field>
+      </column>
+      <column fk="yes" referenceTable="Property_Position" referenceColumn="Id" showColumn="Name">
+        <name>定位</name>
+        <field>PropertyPositionId</field>
+      </column>
+    </columns>
+  </sheet>
+</sheets>

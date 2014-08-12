@@ -1,0 +1,131 @@
+﻿@using Web
+@model Model.Property
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="~/resources/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="~/resources/css/iframe_style.css" />
+    <link id="color" rel="stylesheet" type="text/css" href="~/resources/css/colors/blue.css" />
+    <link rel="stylesheet" type="text/css" href="~/resources/css/rightpage.css" />
+
+    <!-- scripts (jquery) -->
+    <script src="@Url.Content("~/resources/scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/jquery.ui.selectmenu.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/tiny_mce/jquery.tinymce.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/smooth.form.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/smooth.dialog.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/common.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/Property/PropertyEdit.js")" type="text/javascript"></script>
+</head>
+<body>
+    <div id="content">
+        <!-- right -->
+        <div id="right">
+            <!-- box / title -->
+            <div class="box">
+                <div class="title">
+                <h5>Shopping mall编辑</h5>
+            </div>
+                <input type="hidden" id="errorPath" value="@Url.Content("~/resources/images/icons/error.png")" />
+                <form id="form" action="~/Property/EditProperty" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="operate" name="operate" value="@ViewData["operate"]" />
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.CreatedBy)
+                    @Html.HiddenFor(m => m.CreatedOn)
+                    <div class="form">
+                        
+                        <div class="fields" style="">
+                            <div class="field">
+                                <div class="label">
+                                    <label for="input-small">中文名称:</label>
+                                </div>
+                                <div class="input">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "small" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fields" style="">
+                            <div class="field">
+                                <div class="label">
+                                    <label for="input-small">城市:</label>
+                                </div>
+                                <div class="input">
+                                    @Html.SelectList("CityId")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fields" style="">
+                            <div class="field">
+                                <div class="label">
+                                    <label for="input-small">行政区:</label>
+                                </div>
+                                <div class="input">
+                                    @Html.SelectList("DistrictId")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fields" style="">
+                            <div class="field">
+                                <div class="label">
+                                    <label for="input-small">物业管理费(元/㎡/月):</label>
+                                </div>
+                                <div class="input">
+                                    @Html.TextBoxFor(m => m.PropertyFee, new { @class = "small" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fields" style="">
+                            <div class="field">
+                                <div class="label">
+                                    <label for="input-small">车位数量:</label>
+                                </div>
+                                <div class="input">
+                                    @Html.TextBoxFor(m => m.CarPortNum, new { @class = "small" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fields" style="">
+                            <div class="field">
+                                <div class="label">
+                                    <label for="input-small">项目地址:</label>
+                                </div>
+                                <div class="input">
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "small" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fields" style="">
+                            <div class="field">
+                                <div class="label">
+                                    <label for="input-small">Description:</label>
+                                </div>
+                                <div class="textarea">
+                                    @Html.TextAreaFor(m => m.Des, new { @class = "small" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button">
+                        <button type="button" id="btnSave" class="button" style="width: 67px" onclick="javascript:SaveData()" >保存</button>
+                        <button type="button" class="button" onclick="GoBack()" style="width: 67px">返回</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

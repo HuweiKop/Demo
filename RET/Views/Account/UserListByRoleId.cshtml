@@ -1,0 +1,86 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="~/resources/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="~/resources/css/iframe_style.css" />
+    <link id="color" rel="stylesheet" type="text/css" href="~/resources/css/colors/blue.css" />
+    <link rel="stylesheet" type="text/css" href="~/resources/css/rightpage.css" />
+
+    <!-- scripts (jquery) -->
+    <script src="@Url.Content("~/resources/scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/jquery.ui.selectmenu.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/tiny_mce/jquery.tinymce.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/smooth.form.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/smooth.dialog.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/Account/UserRole.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/common.js")" type="text/javascript"></script>
+</head>
+<body>
+
+
+    <div id="content" style="overflow: visible">
+        <div id="right" style="overflow: visible">
+            <!-- table -->
+            <div class="box" style="overflow: visible">
+                <!-- box / title -->
+                <div class="title">
+                    <h5>用户角色列表</h5>
+                    <ul class="links">
+                        <li><a style="FONT-SIZE: 13px" href="#" onclick="AddUserRoleByRole('@ViewData["roleId"]')">添加</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" id="roleId" value="@ViewData["roleId"]" />
+                <div class="table" style="margin-top: 40px; overflow: visible">
+                    <table style="width: 100%" class="tableFix;overflow: visible">
+                        <thead>
+                            <tr>
+                                <th style="width: 43px;">操作</th>
+                                <th>名称</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.Users.Count; i++ )
+                            {
+                                <tr id="@Model.UserRoleIds[i]">
+                                    <td>
+                                        <a href="#" onclick="DeleteUserRole('@Model.UserRoleIds[i]')">删除</a>
+                                    </td>
+                                    <td>@Model.Users[i].UserName</td>
+                                </tr> 
+                            }
+
+                        </tbody>
+                    </table>
+                    <div class="form">
+                        <div class="fields">
+                            <div class="buttons" style="width: 100%; margin-left: 0; text-align: center">
+                                <button type="button" class="button" onclick="GoBack()" style="width: 67px">返回</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!-- end table -->
+        </div>
+    </div>
+
+    <div id="AddUser-dialog-form" title="Add System Access" class="dialog">
+        <iframe id="iframeShowUser" style="width: 100%; height: 100%" frameborder="0"></iframe>
+    </div>
+</body>
+</html>

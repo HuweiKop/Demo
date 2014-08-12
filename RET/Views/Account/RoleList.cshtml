@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="~/resources/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="~/resources/css/iframe_style.css" />
+    <link id="color" rel="stylesheet" type="text/css" href="~/resources/css/colors/blue.css" />
+    <link rel="stylesheet" type="text/css" href="~/resources/css/rightpage.css" />
+
+    <!-- scripts (jquery) -->
+    <script src="@Url.Content("~/resources/scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/jquery.ui.selectmenu.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/tiny_mce/jquery.tinymce.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/smooth.form.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/smooth.dialog.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/resources/scripts/common.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/Account/RoleList.js")" type="text/javascript"></script>
+</head>
+<body>
+
+
+    <div id="content" style="overflow: visible">
+        <div id="right" style="overflow: visible">
+            <!-- table -->
+            <div class="box" style="overflow: visible">
+                <!-- box / title -->
+                <div class="title">
+                    <h5>角色列表</h5>
+                    <ul class="links">
+                        <LI><A style="FONT-SIZE: 13px" href="RoleEdit" onclick="Add()">添加</A></LI>
+                    </ul>
+                </div>
+
+                <div class="table" style="margin-top: 40px; overflow: visible">
+                    <table style="width: 100%" class="tableFix;overflow: visible">
+                        <thead>
+                            <tr>
+                                <th style="width: 43px;">操作</th>
+                                <th>名称</th>
+                                <th>描述</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @foreach (var role in Model)
+                            {
+                                <tr id="@role.Id">
+                                    <td>
+                                        <ul id="quick">
+                                            <li>
+                                                <a href="#">
+                                                    <span class="icon"></span>
+                                                    <span>操作</span>
+                                                </a>
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" onclick="DeleteRole('@role.Id')">删除</a>
+                                                        <a href="#" onclick="UpdateRole('@role.Id')">修改</a>
+                                                        <a href="#" onclick="UpdateUserRole('@role.Id')">为权限增删用户</a>
+                                                        <a href="#" onclick="UpdateRoleResource('@role.Id')">更改权限页面</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>@role.Name</td>
+                                    <td>@role.Des</td>
+                                </tr> 
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <!-- end table -->
+            </div>
+        </div>
+        </div>
+</body>
+</html>

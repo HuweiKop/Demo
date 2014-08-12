@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sheets>
+  <sheet>
+    <name>项目</name>
+    <table>Property</table>
+    <columns>
+      <column>
+        <name>项目名称</name>
+        <field>Name</field>
+      </column>
+      <column fk="yes" referenceTable="District" referenceColumn="Id" showColumn="Name">
+        <name>行政区</name>
+        <field>DistrictId</field>
+      </column>
+      <column fk="yes" referenceTable="City" referenceColumn="Id" showColumn="Name">
+        <name>城市</name>
+        <joinTable>District</joinTable>
+        <field>CityId</field>
+      </column>
+      <column>
+        <name>物业管理费(元/㎡/月)</name>
+        <field>PropertyFee</field>
+      </column>
+      <column>
+        <name>车位数量</name>
+        <field>CarPortNum</field>
+      </column>
+      <column>
+        <name>项目地址</name>
+        <field>Address</field>
+      </column>
+    </columns>
+  </sheet>
+</sheets>

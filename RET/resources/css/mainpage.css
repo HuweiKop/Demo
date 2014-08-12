@@ -1,0 +1,12 @@
+﻿.divoverflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    height: 12px;
+}
+
+div.dialog {
+    display:none;
+}

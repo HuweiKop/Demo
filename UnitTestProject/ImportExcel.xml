@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tables>
+  <table>
+    <name>City</name>
+    <sheetName>项目</sheetName>
+    <tableUniques>
+      <unique>
+        <field>Name</field>
+      </unique>
+    </tableUniques>
+    <fields>
+      <field unique="yes">
+        <name>Name</name>
+        <column>城市</column>
+      </field>
+    </fields>
+  </table>
+  <table>
+    <name>District</name>
+    <sheetName>项目</sheetName>
+    <tableUniques>
+      <unique>
+        <field>Name</field>
+      </unique>
+      <unique>
+        <field>Name</field>
+        <joinTable onTable="District" joinField="Id" onField="CityId">City</joinTable>
+      </unique>
+    </tableUniques>
+    <fields>
+      <field unique="yes">
+        <name>Name</name>
+        <column>行政区</column>
+      </field>
+      <field unique="yes" fk="yes" referenceTable="City">
+        <name>CityId</name>
+        <column>城市</column>
+      </field>
+    </fields>
+  </table>
+  <table>
+    <name>Property</name>
+    <sheetName>项目</sheetName>
+    <tableUniques>
+      <unique>
+        <field>Name</field>
+      </unique>
+    </tableUniques>
+    <fields>
+      <field unique="yes">
+        <name>Name</name>
+        <column>项目名称</column>
+      </field>
+      <field fk="yes" referenceTable="District">
+        <name>DistrictId</name>
+        <columns>
+          <column>行政区</column>
+          <column>城市</column>
+        </columns>
+      </field>
+      <field defaultValue="0">
+        <name>PropertyFee</name>
+        <column>物业管理费(元/㎡/月)</column>
+      </field>
+      <field defaultValue="0">
+        <name>CarPortNum</name>
+        <column>车位数量</column>
+      </field>
+      <field>
+        <name>Address</name>
+        <column>项目地址</column>
+      </field>
+    </fields>
+  </table>
+</tables>

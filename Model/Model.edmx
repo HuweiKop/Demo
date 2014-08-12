@@ -1,0 +1,726 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RETDevModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="RETDevModelStoreContainer">
+          <EntitySet Name="AuditLog" EntityType="RETDevModel.Store.AuditLog" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BrowseInfo" EntityType="RETDevModel.Store.BrowseInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="City" EntityType="RETDevModel.Store.City" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="District" EntityType="RETDevModel.Store.District" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Log4net" EntityType="RETDevModel.Store.Log4net" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LoginInfo" EntityType="RETDevModel.Store.LoginInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Permission" EntityType="RETDevModel.Store.Permission" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Property" EntityType="RETDevModel.Store.Property" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Resource" EntityType="RETDevModel.Store.Resource" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Role" EntityType="RETDevModel.Store.Role" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="RETDevModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="RETDevModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User_Role" EntityType="RETDevModel.Store.User_Role" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_BrowseInfo_LoginInfo" Association="RETDevModel.Store.FK_BrowseInfo_LoginInfo">
+            <End Role="LoginInfo" EntitySet="LoginInfo" />
+            <End Role="BrowseInfo" EntitySet="BrowseInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_District_City" Association="RETDevModel.Store.FK_District_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="District" EntitySet="District" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_Resource" Association="RETDevModel.Store.FK_Permission_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="Permission" EntitySet="Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_Role" Association="RETDevModel.Store.FK_Permission_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Permission" EntitySet="Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resource_Resource" Association="RETDevModel.Store.FK_Resource_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="Resource1" EntitySet="Resource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_Role" Association="RETDevModel.Store.FK_User_Role_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User_Role" EntitySet="User_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_User" Association="RETDevModel.Store.FK_User_Role_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Role" EntitySet="User_Role" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AuditLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModuleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EventType" Type="nvarchar" MaxLength="50" />
+          <Property Name="NewValues" Type="nvarchar(max)" />
+          <Property Name="Time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BrowseInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LoginId" Type="uniqueidentifier" />
+          <Property Name="BrowseUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="Lng" Type="numeric" Scale="14" />
+          <Property Name="lat" Type="numeric" Scale="14" />
+          <Property Name="BrowseTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Des" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Des" Type="nvarchar" MaxLength="500" />
+          <Property Name="CityId" Type="uniqueidentifier" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Log4net">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="nvarchar" MaxLength="50" />
+          <Property Name="Logger" Type="nvarchar" MaxLength="255" />
+          <Property Name="Host" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Thread" Type="nvarchar" MaxLength="255" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="Exception" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LoginInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EquipmentNum" Type="varchar" MaxLength="50" />
+          <Property Name="Lng" Type="numeric" Scale="14" />
+          <Property Name="lat" Type="numeric" Scale="14" />
+          <Property Name="LoginTime" Type="datetime" />
+          <Property Name="LogoutTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" />
+          <Property Name="ResourceId" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Des" Type="nvarchar" MaxLength="500" />
+          <Property Name="DistrictId" Type="uniqueidentifier" />
+          <Property Name="PropertyFee" Type="numeric" Scale="2" />
+          <Property Name="CarPortNum" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Des" Type="nvarchar" MaxLength="500" />
+          <Property Name="Url" Type="varchar" MaxLength="50" />
+          <Property Name="Parent" Type="varchar" MaxLength="10" />
+          <Property Name="ResourceType" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Des" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="RoleId" Type="uniqueidentifier" />
+        </EntityType>
+        <Association Name="FK_BrowseInfo_LoginInfo">
+          <End Role="LoginInfo" Type="RETDevModel.Store.LoginInfo" Multiplicity="0..1" />
+          <End Role="BrowseInfo" Type="RETDevModel.Store.BrowseInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BrowseInfo">
+              <PropertyRef Name="LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_District_City">
+          <End Role="City" Type="RETDevModel.Store.City" Multiplicity="0..1" />
+          <End Role="District" Type="RETDevModel.Store.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_Resource">
+          <End Role="Resource" Type="RETDevModel.Store.Resource" Multiplicity="0..1" />
+          <End Role="Permission" Type="RETDevModel.Store.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="ResourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_Role">
+          <End Role="Role" Type="RETDevModel.Store.Role" Multiplicity="0..1" />
+          <End Role="Permission" Type="RETDevModel.Store.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resource_Resource">
+          <End Role="Resource" Type="RETDevModel.Store.Resource" Multiplicity="0..1" />
+          <End Role="Resource1" Type="RETDevModel.Store.Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Resource1">
+              <PropertyRef Name="Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_Role">
+          <End Role="Role" Type="RETDevModel.Store.Role" Multiplicity="0..1" />
+          <End Role="User_Role" Type="RETDevModel.Store.User_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Role">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_User">
+          <End Role="User" Type="RETDevModel.Store.User" Multiplicity="0..1" />
+          <End Role="User_Role" Type="RETDevModel.Store.User_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Role">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RETDevModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="AuditLogs" EntityType="RETDevModel.AuditLog" />
+          <EntitySet Name="BrowseInfoes" EntityType="RETDevModel.BrowseInfo" />
+          <EntitySet Name="Cities" EntityType="RETDevModel.City" />
+          <EntitySet Name="Districts" EntityType="RETDevModel.District" />
+          <EntitySet Name="Log4net" EntityType="RETDevModel.Log4net" />
+          <EntitySet Name="LoginInfoes" EntityType="RETDevModel.LoginInfo" />
+          <EntitySet Name="Permissions" EntityType="RETDevModel.Permission" />
+          <EntitySet Name="Resources" EntityType="RETDevModel.Resource" />
+          <EntitySet Name="Roles" EntityType="RETDevModel.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="RETDevModel.sysdiagram" />
+          <EntitySet Name="Users" EntityType="RETDevModel.User" />
+          <EntitySet Name="User_Role" EntityType="RETDevModel.User_Role" />
+          <AssociationSet Name="FK_BrowseInfo_LoginInfo" Association="RETDevModel.FK_BrowseInfo_LoginInfo">
+            <End Role="LoginInfo" EntitySet="LoginInfoes" />
+            <End Role="BrowseInfo" EntitySet="BrowseInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_District_City" Association="RETDevModel.FK_District_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="District" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_Resource" Association="RETDevModel.FK_Permission_Resource">
+            <End Role="Resource" EntitySet="Resources" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_Role" Association="RETDevModel.FK_Permission_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resource_Resource" Association="RETDevModel.FK_Resource_Resource">
+            <End Role="Resource" EntitySet="Resources" />
+            <End Role="Resource1" EntitySet="Resources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_Role" Association="RETDevModel.FK_User_Role_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User_Role" EntitySet="User_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_User" Association="RETDevModel.FK_User_Role_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Role" EntitySet="User_Role" />
+          </AssociationSet>
+          <EntitySet Name="Properties" EntityType="RETDevModel.Property" />
+        </EntityContainer>
+        <EntityType Name="AuditLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ModuleName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TableName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EventType" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NewValues" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Time" Precision="3" />
+        </EntityType>
+        <EntityType Name="BrowseInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="LoginId" />
+          <Property Type="String" Name="BrowseUrl" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Lng" Precision="18" Scale="14" />
+          <Property Type="Decimal" Name="lat" Precision="18" Scale="14" />
+          <Property Type="DateTime" Name="BrowseTime" Precision="3" />
+          <NavigationProperty Name="LoginInfo" Relationship="RETDevModel.FK_BrowseInfo_LoginInfo" FromRole="BrowseInfo" ToRole="LoginInfo" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Des" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedOn" Precision="3" />
+          <Property Type="Guid" Name="CreatedBy" />
+          <NavigationProperty Name="Districts" Relationship="RETDevModel.FK_District_City" FromRole="City" ToRole="District" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Des" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="CityId" />
+          <Property Type="DateTime" Name="CreatedOn" Precision="3" />
+          <Property Type="Guid" Name="CreatedBy" />
+          <NavigationProperty Name="City" Relationship="RETDevModel.FK_District_City" FromRole="District" ToRole="City" />
+        </EntityType>
+        <EntityType Name="Log4net">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Level" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Logger" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Host" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Date" Precision="3" />
+          <Property Type="String" Name="Thread" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Message" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Exception" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LoginInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="EquipmentNum" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Lng" Precision="18" Scale="14" />
+          <Property Type="Decimal" Name="lat" Precision="18" Scale="14" />
+          <Property Type="DateTime" Name="LoginTime" Precision="3" />
+          <Property Type="DateTime" Name="LogoutTime" Precision="3" />
+          <NavigationProperty Name="BrowseInfoes" Relationship="RETDevModel.FK_BrowseInfo_LoginInfo" FromRole="LoginInfo" ToRole="BrowseInfo" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="RoleId" />
+          <Property Type="String" Name="ResourceId" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Resource" Relationship="RETDevModel.FK_Permission_Resource" FromRole="Permission" ToRole="Resource" />
+          <NavigationProperty Name="Role" Relationship="RETDevModel.FK_Permission_Role" FromRole="Permission" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Des" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Url" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Parent" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ResourceType" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Permissions" Relationship="RETDevModel.FK_Permission_Resource" FromRole="Resource" ToRole="Permission" />
+          <NavigationProperty Name="Resource1" Relationship="RETDevModel.FK_Resource_Resource" FromRole="Resource" ToRole="Resource1" />
+          <NavigationProperty Name="Resource2" Relationship="RETDevModel.FK_Resource_Resource" FromRole="Resource1" ToRole="Resource" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Des" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Permissions" Relationship="RETDevModel.FK_Permission_Role" FromRole="Role" ToRole="Permission" />
+          <NavigationProperty Name="User_Role" Relationship="RETDevModel.FK_User_Role_Role" FromRole="Role" ToRole="User_Role" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User_Role" Relationship="RETDevModel.FK_User_Role_User" FromRole="User" ToRole="User_Role" />
+        </EntityType>
+        <EntityType Name="User_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="UserId" />
+          <Property Type="Guid" Name="RoleId" />
+          <NavigationProperty Name="Role" Relationship="RETDevModel.FK_User_Role_Role" FromRole="User_Role" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="RETDevModel.FK_User_Role_User" FromRole="User_Role" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_BrowseInfo_LoginInfo">
+          <End Type="RETDevModel.LoginInfo" Role="LoginInfo" Multiplicity="0..1" />
+          <End Type="RETDevModel.BrowseInfo" Role="BrowseInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BrowseInfo">
+              <PropertyRef Name="LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_District_City">
+          <End Type="RETDevModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="RETDevModel.District" Role="District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_Resource">
+          <End Type="RETDevModel.Resource" Role="Resource" Multiplicity="0..1" />
+          <End Type="RETDevModel.Permission" Role="Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="ResourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_Role">
+          <End Type="RETDevModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="RETDevModel.Permission" Role="Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resource_Resource">
+          <End Type="RETDevModel.Resource" Role="Resource" Multiplicity="0..1" />
+          <End Type="RETDevModel.Resource" Role="Resource1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Resource1">
+              <PropertyRef Name="Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_Role">
+          <End Type="RETDevModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="RETDevModel.User_Role" Role="User_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Role">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_User">
+          <End Type="RETDevModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="RETDevModel.User_Role" Role="User_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Role">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Des" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="DistrictId" />
+          <Property Type="Decimal" Name="PropertyFee" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="CarPortNum" />
+          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedOn" Precision="3" />
+          <Property Type="Guid" Name="CreatedBy" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RETDevModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AuditLogs">
+            <EntityTypeMapping TypeName="RETDevModel.AuditLog">
+              <MappingFragment StoreEntitySet="AuditLog">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="NewValues" ColumnName="NewValues" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BrowseInfoes">
+            <EntityTypeMapping TypeName="RETDevModel.BrowseInfo">
+              <MappingFragment StoreEntitySet="BrowseInfo">
+                <ScalarProperty Name="BrowseTime" ColumnName="BrowseTime" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="BrowseUrl" ColumnName="BrowseUrl" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="RETDevModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Des" ColumnName="Des" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="RETDevModel.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Des" ColumnName="Des" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log4net">
+            <EntityTypeMapping TypeName="RETDevModel.Log4net">
+              <MappingFragment StoreEntitySet="Log4net">
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginInfoes">
+            <EntityTypeMapping TypeName="RETDevModel.LoginInfo">
+              <MappingFragment StoreEntitySet="LoginInfo">
+                <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="EquipmentNum" ColumnName="EquipmentNum" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="RETDevModel.Permission">
+              <MappingFragment StoreEntitySet="Permission">
+                <ScalarProperty Name="ResourceId" ColumnName="ResourceId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resources">
+            <EntityTypeMapping TypeName="RETDevModel.Resource">
+              <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="ResourceType" ColumnName="ResourceType" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Des" ColumnName="Des" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="RETDevModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Des" ColumnName="Des" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RETDevModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="RETDevModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Role">
+            <EntityTypeMapping TypeName="RETDevModel.User_Role">
+              <MappingFragment StoreEntitySet="User_Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="RETDevModel.Property">
+              <MappingFragment StoreEntitySet="Property">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CarPortNum" ColumnName="CarPortNum" />
+                <ScalarProperty Name="PropertyFee" ColumnName="PropertyFee" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="Des" ColumnName="Des" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

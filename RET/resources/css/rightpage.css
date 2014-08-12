@@ -1,0 +1,119 @@
+﻿body {
+}
+/* -----------------------------------------------------------
+	quick
+----------------------------------------------------------- */
+#quick {
+    margin: -10px 0 -10px 0;
+    padding: 0;
+    float: left;
+    list-style-type: none;
+    list-style-position: outside;
+}
+
+    #quick li {
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+
+        #quick li a {
+            height: 20px;
+            display: block;
+            background: #4e85bb url("../../resources/images/colors/blue/button_highlight.png") repeat-x;
+            color: #FFFFFF;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+            #quick li a:hover {
+                background: #4e4e4e url("../../resources/images/colors/blue/quick_l_selected.png") no-repeat top left;
+            }
+
+    #quick ul {
+        width: 200px;
+        display: none;
+        position: absolute;
+        background: #FFFFFF;
+        border: 1px solid #666;
+        border-top: 1px solid #003367;
+        list-style-type: none;
+        list-style-position: outside;
+        z-index: 100;
+    }
+
+    #quick li ul li a {
+        margin: 0;
+        padding: 3px 9px 3px 9px;
+        height: 10px;
+        width: 182px;
+        display: block;
+        background: #FFFFFF;
+        color: #0066CC;
+        font-weight: normal;
+        text-align:left;
+    }
+
+        #quick li ul li a:hover {
+            color: #000000;
+            background: #EFF3FF;
+        }
+
+        #quick li ul li a.childs:hover {
+            background: #EFF3FF url("../../resources/images/minus.png") no-repeat 8px 9px;
+        }
+
+    #quick li:hover ul {
+        display: block;
+    }
+
+
+/* -----------------------------------------------------------
+select
+----------------------------------------------------------- */
+
+div.select {
+    margin: 0 0 0 0px;
+    padding: 0;
+    float: left;
+}
+
+div.select a:hover {
+        color: #000000;
+        text-decoration: none;
+    }
+
+div.select select {
+        margin: 0;
+    }
+
+/* -----------------------------------------------------------
+select (jquery styling)
+----------------------------------------------------------- */
+
+div.select a.ui-selectmenu-focus {
+        border: 1px solid #666666;
+    }
+
+div.select a.ui-selectmenu {
+        color: #565656;
+        text-decoration: none;
+    }
+
+    div.select a.ui-selectmenu:hover {
+            color: #000000;
+            text-decoration: none;
+        }
+
+div.select a.ui-selectmenu-focus span.ui-icon {
+        background-image: url(../../resources/images/ui/ui-icons_222222_256x240.png);
+    }
+
+/* -----------------------------------------------------------
+element focus
+----------------------------------------------------------- */
+
+div.select select:focus {
+    background: #f6f6f6;
+    border-color: #666;
+}
