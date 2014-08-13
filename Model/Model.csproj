@@ -46,49 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APIModel\AverageRent.cs" />
-    <Compile Include="APIModel\BrandApi.cs" />
-    <Compile Include="APIModel\BrandsResult.cs" />
     <Compile Include="APIModel\AccountApi.cs" />
-    <Compile Include="APIModel\CBDApi.cs" />
-    <Compile Include="APIModel\CBDInfo.cs" />
-    <Compile Include="APIModel\CBDRentApi.cs" />
-    <Compile Include="APIModel\CBDsAndDistrictsResponse.cs" />
-    <Compile Include="APIModel\CBDsAndDistrictsResult.cs" />
-    <Compile Include="APIModel\CBDsResponse.cs" />
-    <Compile Include="APIModel\CBDsResult.cs" />
-    <Compile Include="APIModel\CitiesResponse.cs" />
-    <Compile Include="APIModel\CitiesResult.cs" />
-    <Compile Include="APIModel\CityApi.cs" />
-    <Compile Include="APIModel\CommercialActivitiesApi.cs" />
-    <Compile Include="APIModel\DeveloperApi.cs" />
-    <Compile Include="APIModel\DeveloperResponse.cs" />
-    <Compile Include="APIModel\DeveloperResult.cs" />
-    <Compile Include="APIModel\DistrictApi.cs" />
-    <Compile Include="APIModel\FloorStatisticsResponse.cs" />
-    <Compile Include="APIModel\InformationApi.cs" />
-    <Compile Include="APIModel\InformationListResponse.cs" />
-    <Compile Include="APIModel\InformationResponse.cs" />
     <Compile Include="APIModel\Location.cs" />
-    <Compile Include="APIModel\PropertiesResponse.cs" />
-    <Compile Include="APIModel\PropertyApi.cs" />
     <Compile Include="APIModel\BaseResult.cs" />
-    <Compile Include="APIModel\FloorStatisticsApi.cs" />
-    <Compile Include="APIModel\PropertyFloorStatisticsResponse.cs" />
-    <Compile Include="APIModel\PropertyFloorStatisticsResult.cs" />
-    <Compile Include="APIModel\PropertyInfoResult.cs" />
-    <Compile Include="APIModel\PropertyInfoResponse.cs" />
-    <Compile Include="APIModel\PropertyStatisticsResult.cs" />
-    <Compile Include="APIModel\PropertyStatisticsResponse.cs" />
-    <Compile Include="APIModel\ShopApi.cs" />
-    <Compile Include="APIModel\ShopResponse.cs" />
-    <Compile Include="APIModel\ShopsResponse.cs" />
-    <Compile Include="APIModel\ShopsResult.cs" />
     <Compile Include="APIModel\ReturnBaseModel.cs" />
     <Compile Include="AuditLog.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="APIModel\BrandsResponse.cs" />
     <Compile Include="BrowseInfo.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -128,7 +92,6 @@
     <Compile Include="Permission.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="APIModel\PropertiesResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Property.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -178,6 +141,9 @@
       <Project>{29e35724-a266-451e-a649-cbe6dab142a3}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="database\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

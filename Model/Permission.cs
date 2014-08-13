@@ -18,7 +18,7 @@ namespace Model
         public Nullable<System.Guid> RoleId { get; set; }
         public string ResourceId { get; set; }
     
-        public virtual Resource Resource { get; set; }
         public virtual Role Role { get; set; }
+        public virtual Resource Resource { get; set; }
     }
 }

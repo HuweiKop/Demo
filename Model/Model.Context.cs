@@ -32,11 +32,11 @@ namespace Model
         public DbSet<Log4net> Log4net { get; set; }
         public DbSet<LoginInfo> LoginInfoes { get; set; }
         public DbSet<Permission> Permissions { get; set; }
-        public DbSet<Resource> Resources { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<User_Role> User_Role { get; set; }
         public DbSet<Property> Properties { get; set; }
+        public DbSet<Resource> Resources { get; set; }
     }
 }

@@ -4,7 +4,7 @@ function showGridTree(resourceArray, alreadbyResourceArray) {
     //init
     gridTree = new TableTree4J("gridTree", "../resources/");
     gridTree.tableDesc = "<table border=\"1\" class=\"GridView\" width=\"100%\" id=\"systemParameterTable\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse\">";
-    var headerDataList = new Array("<img src=\"../resources/images/resx.gif\" alt=\"\"/>Page Management");
+    var headerDataList = new Array("<img src=\"../resources/images/resx.gif\" alt=\"\"/>页面");
     var widthList = new Array("40px");
     //参数: arrayHeader,id,headerWidthList,booleanOpen,classStyle,hrefTip,hrefStatusText,icon,iconOpen
     gridTree.setHeader(headerDataList, "0", widthList, true, "Head", "", "", "", "");
@@ -15,10 +15,10 @@ function showGridTree(resourceArray, alreadbyResourceArray) {
 
     for (i in resourceArray) {
         if (resourceArray[i].ResourceType == "Page") {
-            dataList = new Array("<img src=\"../resources/images/fbico.gif\" alt=\"\"/><input type=\"checkbox\" id=\"" + resourceArray[i].Id + "\" name=\"checkboxPermission\" onclick=\"checkboxFunctionClick(" + resourceArray[i].Id + ")\" value=\"" + resourceArray[i].Id + "\"/>" + resourceArray[i].Name);
+            dataList = new Array("<img src=\"../resources/images/fbico.gif\" alt=\"\"/><input type=\"checkbox\" id=\"" + resourceArray[i].Id + "\" name=\"checkboxPermission\" onclick=\"checkboxFunctionClick(" + resourceArray[i].Id + ")\" value=\"" + resourceArray[i].Id + "\"/>" + resourceArray[i].PageName);
         }
         else {
-            dataList = new Array("<img src=\"../resources/images/aspx.gif\" alt=\"\"/><input type=\"checkbox\" id=\"" + resourceArray[i].Id + "\" name=\"checkboxPermission\" onclick=\"checkboxClick(" + resourceArray[i].Id + ")\" value=\"" + resourceArray[i].Id + "\"/>" + resourceArray[i].Name);
+            dataList = new Array("<img src=\"../resources/images/aspx.gif\" alt=\"\"/><input type=\"checkbox\" id=\"" + resourceArray[i].Id + "\" name=\"checkboxPermission\" onclick=\"checkboxClick(" + resourceArray[i].Id + ")\" value=\"" + resourceArray[i].Id + "\"/>" + resourceArray[i].PageName);
         }
         gridTree.addGirdNode(dataList, resourceArray[i].Id, resourceArray[i].Parent, null, resourceArray[i].Id);
     }

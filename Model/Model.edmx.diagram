@@ -12,19 +12,19 @@
         <EntityTypeShape EntityType="RETDevModel.Log4net" Width="1.5" PointX="7.5958685016240306" PointY="6.8677485319169929" />
         <EntityTypeShape EntityType="RETDevModel.LoginInfo" Width="1.5" PointX="10.68274326374882" PointY="24.838922601583842" />
         <EntityTypeShape EntityType="RETDevModel.Permission" Width="1.5" PointX="7.7475033215002647" PointY="4.95469668738297" />
-        <EntityTypeShape EntityType="RETDevModel.Resource" Width="1.5" PointX="1.0611119498783312" PointY="23.869642373113727" />
         <EntityTypeShape EntityType="RETDevModel.Role" Width="1.5" PointX="11.795137077474564" PointY="9.1459024293096274" />
         <EntityTypeShape EntityType="RETDevModel.sysdiagram" Width="1.5" PointX="7.197508561982545" PointY="6.3691933780765133" />
         <EntityTypeShape EntityType="RETDevModel.User" Width="1.5" PointX="2.0820042705545223" PointY="28.355361072512046" />
         <EntityTypeShape EntityType="RETDevModel.User_Role" Width="1.5" PointX="1.1024945625581286" PointY="7.9797522760833388" />
         <AssociationConnector Association="RETDevModel.FK_BrowseInfo_LoginInfo" />
         <AssociationConnector Association="RETDevModel.FK_District_City" />
-        <AssociationConnector Association="RETDevModel.FK_Permission_Resource" />
         <AssociationConnector Association="RETDevModel.FK_Permission_Role" />
-        <AssociationConnector Association="RETDevModel.FK_Resource_Resource" />
         <AssociationConnector Association="RETDevModel.FK_User_Role_Role" />
         <AssociationConnector Association="RETDevModel.FK_User_Role_User" />
         <EntityTypeShape EntityType="RETDevModel.Property" Width="1.5" PointX="3.0483501046189803" PointY="3.9206120539086928" />
+        <EntityTypeShape EntityType="RETDevModel.Resource" Width="1.5" PointX="10.01690903772456" PointY="31.217515870564391" />
+        <AssociationConnector Association="RETDevModel.FK_Permission_Resource" />
+        <AssociationConnector Association="RETDevModel.FK_Resource_Resource" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

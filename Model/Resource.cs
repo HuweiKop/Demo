@@ -22,6 +22,7 @@ namespace Model
     
         public string Id { get; set; }
         public string Name { get; set; }
+        public string PageName { get; set; }
         public string Des { get; set; }
         public string Url { get; set; }
         public string Parent { get; set; }

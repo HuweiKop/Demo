@@ -130,7 +130,7 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Des" Type="nvarchar" MaxLength="500" />
+          <Property Name="Des" Type="nvarchar(max)" />
           <Property Name="DistrictId" Type="uniqueidentifier" />
           <Property Name="PropertyFee" Type="numeric" Scale="2" />
           <Property Name="CarPortNum" Type="int" />
@@ -144,6 +144,7 @@
           </Key>
           <Property Name="Id" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="PageName" Type="nvarchar" MaxLength="50" />
           <Property Name="Des" Type="nvarchar" MaxLength="500" />
           <Property Name="Url" Type="varchar" MaxLength="50" />
           <Property Name="Parent" Type="varchar" MaxLength="10" />
@@ -279,7 +280,6 @@
           <EntitySet Name="Log4net" EntityType="RETDevModel.Log4net" />
           <EntitySet Name="LoginInfoes" EntityType="RETDevModel.LoginInfo" />
           <EntitySet Name="Permissions" EntityType="RETDevModel.Permission" />
-          <EntitySet Name="Resources" EntityType="RETDevModel.Resource" />
           <EntitySet Name="Roles" EntityType="RETDevModel.Role" />
           <EntitySet Name="sysdiagrams" EntityType="RETDevModel.sysdiagram" />
           <EntitySet Name="Users" EntityType="RETDevModel.User" />
@@ -292,17 +292,9 @@
             <End Role="City" EntitySet="Cities" />
             <End Role="District" EntitySet="Districts" />
           </AssociationSet>
-          <AssociationSet Name="FK_Permission_Resource" Association="RETDevModel.FK_Permission_Resource">
-            <End Role="Resource" EntitySet="Resources" />
-            <End Role="Permission" EntitySet="Permissions" />
-          </AssociationSet>
           <AssociationSet Name="FK_Permission_Role" Association="RETDevModel.FK_Permission_Role">
             <End Role="Role" EntitySet="Roles" />
             <End Role="Permission" EntitySet="Permissions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resource_Resource" Association="RETDevModel.FK_Resource_Resource">
-            <End Role="Resource" EntitySet="Resources" />
-            <End Role="Resource1" EntitySet="Resources" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Role_Role" Association="RETDevModel.FK_User_Role_Role">
             <End Role="Role" EntitySet="Roles" />
@@ -313,6 +305,15 @@
             <End Role="User_Role" EntitySet="User_Role" />
           </AssociationSet>
           <EntitySet Name="Properties" EntityType="RETDevModel.Property" />
+          <EntitySet Name="Resources" EntityType="RETDevModel.Resource" />
+          <AssociationSet Name="FK_Permission_Resource" Association="RETDevModel.FK_Permission_Resource">
+            <End Role="Resource" EntitySet="Resources" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resource_Resource" Association="RETDevModel.FK_Resource_Resource">
+            <End Role="Resource" EntitySet="Resources" />
+            <End Role="Resource1" EntitySet="Resources" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AuditLog">
           <Key>
@@ -393,22 +394,8 @@
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="RoleId" />
           <Property Type="String" Name="ResourceId" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Resource" Relationship="RETDevModel.FK_Permission_Resource" FromRole="Permission" ToRole="Resource" />
           <NavigationProperty Name="Role" Relationship="RETDevModel.FK_Permission_Role" FromRole="Permission" ToRole="Role" />
-        </EntityType>
-        <EntityType Name="Resource">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="String" Name="Id" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Des" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Url" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Parent" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ResourceType" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Permissions" Relationship="RETDevModel.FK_Permission_Resource" FromRole="Resource" ToRole="Permission" />
-          <NavigationProperty Name="Resource1" Relationship="RETDevModel.FK_Resource_Resource" FromRole="Resource" ToRole="Resource1" />
-          <NavigationProperty Name="Resource2" Relationship="RETDevModel.FK_Resource_Resource" FromRole="Resource1" ToRole="Resource" />
+          <NavigationProperty Name="Resource" Relationship="RETDevModel.FK_Permission_Resource" FromRole="Permission" ToRole="Resource" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -473,18 +460,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Permission_Resource">
-          <End Type="RETDevModel.Resource" Role="Resource" Multiplicity="0..1" />
-          <End Type="RETDevModel.Permission" Role="Permission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Resource">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Permission">
-              <PropertyRef Name="ResourceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Permission_Role">
           <End Type="RETDevModel.Role" Role="Role" Multiplicity="0..1" />
           <End Type="RETDevModel.Permission" Role="Permission" Multiplicity="*" />
@@ -494,18 +469,6 @@
             </Principal>
             <Dependent Role="Permission">
               <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resource_Resource">
-          <End Type="RETDevModel.Resource" Role="Resource" Multiplicity="0..1" />
-          <End Type="RETDevModel.Resource" Role="Resource1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Resource">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Resource1">
-              <PropertyRef Name="Parent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -539,7 +502,7 @@
           </Key>
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Des" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Des" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Guid" Name="DistrictId" />
           <Property Type="Decimal" Name="PropertyFee" Precision="18" Scale="2" />
           <Property Type="Int32" Name="CarPortNum" />
@@ -547,6 +510,45 @@
           <Property Type="DateTime" Name="CreatedOn" Precision="3" />
           <Property Type="Guid" Name="CreatedBy" />
         </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PageName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Des" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Url" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Parent" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ResourceType" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Permissions" Relationship="RETDevModel.FK_Permission_Resource" FromRole="Resource" ToRole="Permission" />
+          <NavigationProperty Name="Resource1" Relationship="RETDevModel.FK_Resource_Resource" FromRole="Resource" ToRole="Resource1" />
+          <NavigationProperty Name="Resource2" Relationship="RETDevModel.FK_Resource_Resource" FromRole="Resource1" ToRole="Resource" />
+        </EntityType>
+        <Association Name="FK_Permission_Resource">
+          <End Type="RETDevModel.Resource" Role="Resource" Multiplicity="0..1" />
+          <End Type="RETDevModel.Permission" Role="Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="ResourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resource_Resource">
+          <End Type="RETDevModel.Resource" Role="Resource" Multiplicity="0..1" />
+          <End Type="RETDevModel.Resource" Role="Resource1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Resource1">
+              <PropertyRef Name="Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -636,18 +638,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Resources">
-            <EntityTypeMapping TypeName="RETDevModel.Resource">
-              <MappingFragment StoreEntitySet="Resource">
-                <ScalarProperty Name="ResourceType" ColumnName="ResourceType" />
-                <ScalarProperty Name="Parent" ColumnName="Parent" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Des" ColumnName="Des" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="RETDevModel.Role">
               <MappingFragment StoreEntitySet="Role">
@@ -696,6 +686,19 @@
                 <ScalarProperty Name="PropertyFee" ColumnName="PropertyFee" />
                 <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
                 <ScalarProperty Name="Des" ColumnName="Des" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resources">
+            <EntityTypeMapping TypeName="RETDevModel.Resource">
+              <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="ResourceType" ColumnName="ResourceType" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Des" ColumnName="Des" />
+                <ScalarProperty Name="PageName" ColumnName="PageName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
